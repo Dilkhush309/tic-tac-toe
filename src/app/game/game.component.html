@@ -5,7 +5,7 @@
         <p class="current-status mat-display-1" style="color: #fff;">Start the game on the button</p>
     </div>
 
-    <div *ngIf="this.game.gameStatus ===0" class="field d-flex justify-content-center" style="width: 100%;">
+    <div *ngIf="this.game.gameStatus === 0" class="field d-flex justify-content-center" style="width: 100%;">
         <button (click)="startGame()" mat-raised-button color="accent" class="start-game-button">Start Game Now!</button>
     </div>
 

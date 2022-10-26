@@ -10,7 +10,6 @@ import { Gamelogic } from '../gamelogic';
 })
 
 export class GameComponent implements OnInit {
-  public information;
 
   constructor(public game: Gamelogic) { }
 
@@ -21,27 +20,27 @@ export class GameComponent implements OnInit {
     this.game.gameStart();
     const currentPlayer = 'Current turn: Player: ' + this.game.currentTurn;
     const information = document.querySelector('.current-status');
-    if (information!= null)
-     information.innerHTML = currentPlayer;
+    information.innerHTML = currentPlayer;
   }
 
-  async clickSubfield(subfield: any): Promise<void> {
+  async clickSubfield( subfield: any ): Promise<void> {
     if (this.game.gameStatus === 1) {
       const position = subfield.currentTarget.getAttribute('position');
+      const information = document.querySelector('.current-status');
 
       this.game.setField(position, this.game.currentTurn);
       const color = this.game.getplayerColorClass();
       subfield.currentTarget.classList.add(color);
 
-      await this.game.checkGameEndWinner().then((end: boolean) => {
+      await this.game.checkGameEndWinner().then( (end: boolean) => {
         if (this.game.gameStatus === 0 && end) {
-           this.information.innerHTML = 'The winner is player nr. ' + this.game.currentTurn;
+           information.innerHTML = 'The winner is player no. ' + this.game.currentTurn;
         }
       });
 
       await this.game.checkGameEndFull().then((end: boolean) => {
         if (this.game.gameStatus === 0 && end) {
-           this.information.innerHTML = 'No winner, draw';
+           information.innerHTML = 'No winner, draw';
         }
       });
 
@@ -49,8 +48,7 @@ export class GameComponent implements OnInit {
 
       if (this.game.gameStatus === 1) {
         const currentPlayer = 'Current turn: Player: ' + this.game.currentTurn;
-         this.information.innerHTML = currentPlayer;
-
+        information.innerHTML = currentPlayer;
       }
     }
   }
