@@ -23,7 +23,7 @@ export class GameComponent implements OnInit {
     information.innerHTML = currentPlayer;
   }
 
-  async clickSubfield( subfield: any ): Promise<void> {
+  async clickSubfield(subfield: any): Promise<void> {
     if (this.game.gameStatus === 1) {
       const position = subfield.currentTarget.getAttribute('position');
       const information = document.querySelector('.current-status');
@@ -32,15 +32,15 @@ export class GameComponent implements OnInit {
       const color = this.game.getplayerColorClass();
       subfield.currentTarget.classList.add(color);
 
-      await this.game.checkGameEndWinner().then( (end: boolean) => {
+      await this.game.checkGameEndWinner().then((end: boolean) => {
         if (this.game.gameStatus === 0 && end) {
-           information.innerHTML = 'The winner is player no. ' + this.game.currentTurn;
+          information.innerHTML = 'The winner is player no. ' + this.game.currentTurn;
         }
       });
 
       await this.game.checkGameEndFull().then((end: boolean) => {
         if (this.game.gameStatus === 0 && end) {
-           information.innerHTML = 'No winner, draw';
+          information.innerHTML = 'No winner, draw';
         }
       });
 
